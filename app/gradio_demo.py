@@ -25,11 +25,22 @@ def translate(text, direction):
 
 
 def main():
+    """Launch the interactive translation demo."""
+
+    examples = [
+        ["How are you?", "en-ttj"],
+        ["Oraire ota?", "ttj-en"],
+    ]
+
     iface = gr.Interface(
         fn=translate,
-        inputs=[gr.Textbox(lines=3, label="Input"), gr.Radio(["en-ttj", "ttj-en"], value="en-ttj", label="Direction")],
-        outputs=gr.Textbox(label="Translation"),
+        inputs=[
+            gr.Textbox(lines=3, label="Input Text"),
+            gr.Radio(["en-ttj", "ttj-en"], value="en-ttj", label="Direction (English→Rutooro or vice versa)")
+        ],
+        outputs=gr.Textbox(label="Translated Text"),
         title="Rutooro-English Translator",
+        examples=examples,
     )
     iface.launch()
 
