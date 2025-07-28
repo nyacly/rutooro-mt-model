@@ -35,7 +35,17 @@ python scripts/preprocess.py data/english_rutooro.json data/clean
 
 ## Training
 
-Open `notebooks/train_nllb_colab.ipynb` in Google Colab. The notebook checks GPU availability, enables mixed precision training and uses early stopping. Upload the files from `data/clean/` and run the cells to fine-tune the model.
+Open `notebooks/train_nllb_colab.ipynb` in Google Colab. The notebook checks GPU availability, enables mixed precision training and uses early stopping. Mount your Google Drive when prompted so training data and checkpoints are stored persistently.
+
+After mounting, the notebook creates the following folders in your Drive:
+
+```
+/content/drive/MyDrive/rutooro-mt-data/    # datasets
+/content/drive/MyDrive/rutooro-mt-models/  # model checkpoints
+/content/drive/MyDrive/rutooro-mt-outputs/ # logs and metrics
+```
+
+Prepared datasets, checkpoints and final models will be saved here so you can resume training or run the demo without reprocessing.
 
 ## Demo
 
