@@ -1,6 +1,6 @@
 # Rutooro-English Machine Translation
 
-This repository fine-tunes the `facebook/nllb-200-distilled-600M` model on a small English↔Rutooro corpus (~16k sentence pairs).
+This repository fine-tunes the `facebook/nllb-200-distilled-600M` model on an English↔Rutooro corpus.
 
 ## Structure
 
@@ -13,16 +13,42 @@ This repository fine-tunes the `facebook/nllb-200-distilled-600M` model on a sma
 ├── models/                # config / trained model
 ```
 
-## Usage
+## Getting the data
 
-1. Install dependencies
-   ```bash
-   pip install -r requirements.txt
-   ```
-2. Run preprocessing or evaluation scripts in `scripts/`.
-3. Launch the Gradio demo:
-   ```bash
-   python app/gradio_demo.py
-   ```
+Install dependencies first:
 
-See `notebooks/train_nllb_colab.ipynb` for a full training pipeline on Google Colab.
+```bash
+pip install -r requirements.txt
+```
+
+Download the raw parallel corpus from HuggingFace or MaNy-Eng and convert it to JSON:
+
+```bash
+python scripts/download_dataset.py --source hf --output data/english_rutooro.json
+```
+
+Clean the data and create train/dev/test splits (files will be written to `data/clean/`):
+
+```bash
+python scripts/preprocess.py data/english_rutooro.json data/clean
+```
+
+## Training
+
+Open `notebooks/train_nllb_colab.ipynb` in Google Colab. The notebook checks GPU availability, enables mixed precision training and uses early stopping. Upload the files from `data/clean/` and run the cells to fine-tune the model.
+
+## Demo
+
+Launch a small Gradio interface to test the trained model locally:
+
+```bash
+python app/gradio_demo.py
+```
+
+## Sample translations
+
+| English | Rutooro |
+|---------|---------|
+| "How are you?" | "Oraire ota?" |
+| "Thank you" | "Webale" |
+
